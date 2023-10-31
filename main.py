@@ -26,7 +26,7 @@ logger.addHandler(file_handler)
 
 if __name__ == '__main__':
 
-    binance = BinanceFuturesClient(True)
+    binance = BinanceFuturesClient("335b56bcfa680f9e05da471dd9e9bc4405d7314b98c763ad4c5bbb0d88d0a268","489245401743d4fa727b55e1b104d928c44880a1466758db5e34e0ac89343c40", True)
     # print(binance.get_contracts())
     # print(binance.get_bid_ask("BTCUSDT"))
     print(binance.get_historical_candles("BTCUSDT", "1h"))
