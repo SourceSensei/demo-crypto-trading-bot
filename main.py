@@ -1,6 +1,8 @@
 import tkinter as tk
 import logging
 
+from connectors.binance_futures import BinanceFuturesClient
+
 logger = logging.getLogger()
 
 logger.setLevel(logging.INFO)
@@ -23,6 +25,12 @@ logger.addHandler(file_handler)
 # logger.error("This message helps to debug an error that occurred in your program")
 
 if __name__ == '__main__':
+
+    binance = BinanceFuturesClient(True)
+    # print(binance.get_contracts())
+    # print(binance.get_bid_ask("BTCUSDT"))
+    print(binance.get_historical_candles("BTCUSDT", "1h"))
+
     root = tk.Tk()
     root.mainloop()
 
