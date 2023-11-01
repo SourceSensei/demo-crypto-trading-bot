@@ -12,3 +12,15 @@
 2023-10-31 00:37:32,342 INFO :: Binance Futures Client successfully initialized
 2023-10-31 00:38:05,405 INFO :: Binance Futures Client successfully initialized
 2023-10-31 00:40:33,347 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:03:24,553 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:03:25,885 ERROR :: Error while making GET request to /fapi/v1/account: {'code': -5000, 'msg': 'GET /fapi/v1/account is retired, please use GET /fapi/v2/account'} (error code 400)
+2023-11-01 00:04:23,527 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:29:43,401 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:31:01,691 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:32:16,965 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:53:05,730 INFO :: Binance Futures Client successfully initialized
+2023-11-01 00:53:07,229 INFO :: Binance connection opened
+2023-11-01 01:33:27,448 INFO :: Binance Futures Client successfully initialized
+2023-11-01 01:33:28,985 INFO :: Binance connection opened
+2023-11-01 01:34:43,553 INFO :: Binance Futures Client successfully initialized
+2023-11-01 01:34:45,069 INFO :: Binance connection opened
