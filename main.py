@@ -1,7 +1,7 @@
 import tkinter as tk
 import logging
-
 from connectors.binance_futures import BinanceFuturesClient
+from connectors.bitmex import BitmexClient
 
 logger = logging.getLogger()
 
@@ -25,14 +25,22 @@ logger.addHandler(file_handler)
 # logger.error("This message helps to debug an error that occurred in your program")
 
 if __name__ == '__main__':
-    binance = BinanceFuturesClient("335b56bcfa680f9e05da471dd9e9bc4405d7314b98c763ad4c5bbb0d88d0a268",
-                                   "489245401743d4fa727b55e1b104d928c44880a1466758db5e34e0ac89343c40", True)
+    binance = BinanceFuturesClient("PUBLIC_KEY",
+                                   "PRIVATE_KEY", True)
     # print(binance.get_contracts())
     # print(binance.get_bid_ask("BTCUSDT"))
     # print(binance.get_balances())
     # print(binance.place_order("BTCUSDT", "BUY", 0.01, "LIMIT", 20000, "GTC"))
     # print(binance.get_order_status("BTCUSDT", 3503600231))
     # print(binance.cancel_order("BTCUSDT", 3503600231))
+
+    bitmex = BitmexClient("PUBLIC_KEY", "SECRET_KEY", True)
+
+    # print(bitmex.contracts['XBTUSD'].base_asset, bitmex.contracts['XBTUSD'].price_decimals)
+    # print(bitmex.balances['XBt'].wallet_balance)
+    # print(bitmex.place_order(bitmex.contracts['XBTUSD'], "Limit", 50, "Buy",
+                             # price=20000, tif="GoodTillCancel"))
+
 
     root = tk.Tk()
     root.mainloop()
