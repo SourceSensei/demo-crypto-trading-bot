@@ -123,16 +123,16 @@ class BitmexClient:
 
         return candles
 
-    def place_order(self, contract: Contract, order_type: str, quantity: int, side: str,
-                    price=None, tif=None) -> OrderStatus:
+    def place_order(self, contract: Contract, order_type: str, quantity: int, side: str, price=None, tif=None) -> OrderStatus:
         data = dict()
+
         data['symbol'] = contract.symbol
         data['side'] = side.capitalize()
-        data['orderQty'] = quantity
+        data['orderQty'] = round(quantity / contract.lot_size) * contract.lot_size
         data['ordType'] = order_type.capitalize()
 
         if price is not None:
-            data['price'] = price
+            data['price'] = round(round(price / contract.tick_size) * contract.tick_size, 8)
 
         if tif is not None:
             data['timeInForce'] = tif
