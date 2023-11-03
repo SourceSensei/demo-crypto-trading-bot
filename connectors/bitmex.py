@@ -33,10 +33,16 @@ class BitmexClient:
 
         self.prices = dict()
 
+        self.logs = []
+
         t = threading.Thread(target=self._start_ws)
         t.start()
 
         logger.info("Bitmex Client successfully initialized")
+
+    def _add_log(self, msg: str):
+        logger.info("%s", msg)
+        self.logs.append({"log": msg, "displayed": False})
 
     def _generate_signature(self, method: str, endpoint: str, expires: str, data: typing.Dict) -> str:
         message = method + endpoint + "?" + urlencode(data) + expires if len(data) > 0 else method + endpoint + expires
@@ -206,7 +212,9 @@ class BitmexClient:
                     if 'askPrice' in d:
                         self.prices[symbol]['ask'] = d['askPrice']
 
-                    # print(symbol, self.prices[symbol])
+                    # if symbol == "XBTUSD":
+                        # self._add_log(symbol + " " +
+                                      # str(self.prices[symbol]['bid']) + " / " + str(self.prices[symbol]['ask']))
 
     def subscribe_channel(self, topic: str):
         data = dict()

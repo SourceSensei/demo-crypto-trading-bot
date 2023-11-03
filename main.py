@@ -2,6 +2,7 @@ import tkinter as tk
 import logging
 from connectors.binance_futures import BinanceFuturesClient
 from connectors.bitmex import BitmexClient
+from interface.root_component import Root
 
 logger = logging.getLogger()
 
@@ -42,5 +43,5 @@ if __name__ == '__main__':
                              # price=20000, tif="GoodTillCancel"))
 
 
-    root = tk.Tk()
+    root = Root(binance, bitmex)
     root.mainloop()
