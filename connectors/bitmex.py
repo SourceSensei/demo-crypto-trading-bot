@@ -2,13 +2,19 @@ import logging
 import requests
 import time
 import typing
+
 from urllib.parse import urlencode
+
 import hmac
 import hashlib
+
 import websocket
 import json
+
 import threading
+
 from models import *
+
 
 logger = logging.getLogger()
 
@@ -45,8 +51,8 @@ class BitmexClient:
         self.logs.append({"log": msg, "displayed": False})
 
     def _generate_signature(self, method: str, endpoint: str, expires: str, data: typing.Dict) -> str:
-        message = method + endpoint + "?" + urlencode(data) + expires if len(data) > 0 else method + endpoint + expires
 
+        message = method + endpoint + "?" + urlencode(data) + expires if len(data) > 0 else method + endpoint + expires
         return hmac.new(self._secret_key.encode(), message.encode(), hashlib.sha256).hexdigest()
 
     def _make_request(self, method: str, endpoint: str, data: typing.Dict):
@@ -63,12 +69,14 @@ class BitmexClient:
             except Exception as e:
                 logger.error("Connection error while making %s request to %s: %s", method, endpoint, e)
                 return None
+
         elif method == "POST":
             try:
                 response = requests.post(self._base_url + endpoint, params=data, headers=headers)
             except Exception as e:
                 logger.error("Connection error while making %s request to %s: %s", method, endpoint, e)
                 return None
+
         elif method == "DELETE":
             try:
                 response = requests.delete(self._base_url + endpoint, params=data, headers=headers)
@@ -81,8 +89,8 @@ class BitmexClient:
         if response.status_code == 200:
             return response.json()
         else:
-            logger.error("Error while making %s request to %s: %s (error code %s)", method, endpoint,
-                         response.json(), response.status_code)
+            logger.error("Error while making %s request to %s: %s (error code %s)",
+                         method, endpoint, response.json(), response.status_code)
             return None
 
     def get_contracts(self) -> typing.Dict[str, Contract]:
@@ -113,6 +121,7 @@ class BitmexClient:
 
     def get_historical_candles(self, contract: Contract, timeframe: str) -> typing.List[Candle]:
         data = dict()
+
         data['symbol'] = contract.symbol
         data['partial'] = True
         data['binSize'] = timeframe
@@ -162,6 +171,7 @@ class BitmexClient:
         return order_status
 
     def get_order_status(self, order_id: str, contract: Contract) -> OrderStatus:
+
         data = dict()
         data['symbol'] = contract.symbol
         data['reverse'] = True
@@ -190,17 +200,20 @@ class BitmexClient:
         self.subscribe_channel("instrument")
 
     def _on_close(self, ws):
-        logger.warning("Bitmex connection closed")
+        logger.warning("Bitmex Websocket connection closed")
 
     def _on_error(self, ws, msg: str):
         logger.error("Bitmex connection error: %s", msg)
 
     def _on_message(self, ws, msg: str):
+
         data = json.loads(msg)
 
         if "table" in data:
             if data['table'] == "instrument":
+
                 for d in data['data']:
+
                     symbol = d['symbol']
 
                     if symbol not in self.prices:
@@ -208,13 +221,8 @@ class BitmexClient:
 
                     if 'bidPrice' in d:
                         self.prices[symbol]['bid'] = d['bidPrice']
-
                     if 'askPrice' in d:
                         self.prices[symbol]['ask'] = d['askPrice']
-
-                    # if symbol == "XBTUSD":
-                        # self._add_log(symbol + " " +
-                                      # str(self.prices[symbol]['bid']) + " / " + str(self.prices[symbol]['ask']))
 
     def subscribe_channel(self, topic: str):
         data = dict()
@@ -226,16 +234,4 @@ class BitmexClient:
             self._ws.send(json.dumps(data))
         except Exception as e:
             logger.error("Websocket error while subscribing to %s: %s", topic, e)
-
-
-
-
-
-
-
-
-
-
-
-
 
