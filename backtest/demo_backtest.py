@@ -1,31 +1,48 @@
+import backtesting
+import pandas as pd
+from backtesting.lib import SignalStrategy, TrailingStrategy
 from backtesting import Backtest, Strategy
-from backtesting.test import GOOG
+from backtesting.test import EURUSD
 from backtesting.lib import crossover
-import talib
+from backtesting.test import SMA
+from ta.wrapper import add_all_ta_features
+from ta.momentum import rsi
 
 
-# print(GOOG)
-
-
-class RsiOscillator(Strategy):
-
-    upper_bound = 70
-    lower_bound = 30
+class SmaCross(SignalStrategy,
+               TrailingStrategy):
+    n1 = 10
+    n2 = 25
 
     def init(self):
-        self.rsi = self.I(talib.RSI, self.data.Close, 14)
+        # In init() and in next() it is important to call the
+        # super method to properly initialize the parent classes
+        super().init()
 
-    def next(self):
+        # Precompute the two moving averages
+        sma1 = self.I(SMA, self.data.Close, self.n1)
+        sma2 = self.I(SMA, self.data.Close, self.n2)
 
-        if crossover(self.rsi, self.upper_bound):
-            self.position.close()
+        # Where sma1 crosses sma2 upwards. Diff gives us [-1,0, *1*]
+        signal = (pd.Series(sma1) > sma2).astype(int).diff().fillna(0)
+        signal = signal.replace(-1, 0)  # Upwards/long only
 
-        elif crossover(self.lower_bound, self.rsi):
-            self.buy()
+        # Use 95% of available liquidity (at the time) on each order.
+        # (Leaving a value of 1. would instead buy a single share.)
+        entry_size = signal * .95
+
+        # Set order entry sizes using the method provided by
+        # `SignalStrategy`. See the docs.
+        self.set_signal(entry_size=entry_size)
+
+        # Set trailing stop-loss to 2x ATR using
+        # the method provided by `TrailingStrategy`
+        self.set_trailing_sl(2)
 
 
-bt = Backtest(GOOG, RsiOscillator, cash=1000)
+bt = Backtest(EURUSD, SmaCross, cash=1000, commission=.002)
 
-stats = bt.run()
+print(Backtest)
 
-print(stats)
+bt.run()
+bt.plot()
