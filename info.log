@@ -199,3 +199,21 @@
 2023-11-04 21:19:45,516 INFO :: Bitmex Client successfully initialized
 2023-11-04 21:19:45,921 INFO :: Binance connection opened
 2023-11-04 21:19:45,948 INFO :: Bitmex connection opened
+2023-11-05 02:29:55,162 DEBUG :: Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2023-11-05 02:29:56,807 DEBUG :: https://testnet.binancefuture.com:443 "GET /fapi/v1/exchangeInfo HTTP/1.1" 200 None
+2023-11-05 02:29:56,819 DEBUG :: Starting new HTTPS connection (1): testnet.binancefuture.com:443
+2023-11-05 02:29:57,979 DEBUG :: https://testnet.binancefuture.com:443 "GET /fapi/v1/account?timestamp=1699151396818&signature=986c630399d5b91d82eacb2ef98c06c160a1e8cb64d08d4ee2120a099fbaec13 HTTP/1.1" 401 46
+2023-11-05 02:29:57,980 ERROR :: Error while making GET request to /fapi/v1/account: {'code': -2014, 'msg': 'API-key format invalid.'} (error code 401)
+2023-11-05 02:29:57,983 INFO :: Binance Futures Client successfully initialized
+2023-11-05 02:29:57,985 DEBUG :: Starting new HTTPS connection (1): testnet.bitmex.com:443
+2023-11-05 02:29:58,522 DEBUG :: https://testnet.bitmex.com:443 "GET /api/v1/instrument/active HTTP/1.1" 400 59
+2023-11-05 02:29:58,522 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'Missing API key.', 'name': 'HTTPError'}} (error code 400)
+2023-11-05 02:29:58,525 DEBUG :: Starting new HTTPS connection (1): testnet.bitmex.com:443
+2023-11-05 02:29:59,026 DEBUG :: https://testnet.bitmex.com:443 "GET /api/v1/user/margin?currency=all HTTP/1.1" 400 59
+2023-11-05 02:29:59,027 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'Missing API key.', 'name': 'HTTPError'}} (error code 400)
+2023-11-05 02:29:59,030 INFO :: Bitmex Client successfully initialized
+2023-11-05 02:29:59,603 INFO :: Binance connection opened
+2023-11-05 02:29:59,604 INFO :: Binance: subscribing to: btcusdt@bookTicker
+2023-11-05 02:29:59,887 INFO :: Bitmex connection opened
+2023-11-05 02:31:37,634 WARNING :: Binance Websocket connection closed
+2023-11-05 02:31:37,689 WARNING :: Bitmex Websocket connection closed
