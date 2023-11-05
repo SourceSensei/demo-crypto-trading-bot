@@ -185,3 +185,17 @@
 2023-11-03 15:54:47,899 INFO :: Bitmex Client successfully initialized
 2023-11-03 15:54:48,301 INFO :: Bitmex connection opened
 2023-11-03 15:54:48,369 INFO :: Binance connection opened
+2023-11-04 20:44:36,895 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -2014, 'msg': 'API-key format invalid.'} (error code 401)
+2023-11-04 20:44:36,898 INFO :: Binance Futures Client successfully initialized
+2023-11-04 20:44:37,639 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'Invalid API Key.', 'name': 'HTTPError'}} (error code 401)
+2023-11-04 20:44:38,140 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'Invalid API Key.', 'name': 'HTTPError'}} (error code 401)
+2023-11-04 20:44:38,142 INFO :: Bitmex Client successfully initialized
+2023-11-04 20:44:38,425 INFO :: Binance connection opened
+2023-11-04 20:44:38,691 INFO :: Bitmex connection opened
+2023-11-04 21:19:44,486 ERROR :: Error while making GET request to /fapi/v2/account: {'code': -2014, 'msg': 'API-key format invalid.'} (error code 401)
+2023-11-04 21:19:44,491 INFO :: Binance Futures Client successfully initialized
+2023-11-04 21:19:45,057 ERROR :: Error while making GET request to /api/v1/instrument/active: {'error': {'message': 'Invalid API Key.', 'name': 'HTTPError'}} (error code 401)
+2023-11-04 21:19:45,512 ERROR :: Error while making GET request to /api/v1/user/margin: {'error': {'message': 'Invalid API Key.', 'name': 'HTTPError'}} (error code 401)
+2023-11-04 21:19:45,516 INFO :: Bitmex Client successfully initialized
+2023-11-04 21:19:45,921 INFO :: Binance connection opened
+2023-11-04 21:19:45,948 INFO :: Bitmex connection opened

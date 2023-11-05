@@ -2,7 +2,7 @@ import backtesting
 import pandas as pd
 from backtesting.lib import SignalStrategy, TrailingStrategy
 from backtesting import Backtest, Strategy
-from backtesting.test import EURUSD
+from backtesting.test import GOOG
 from backtesting.lib import crossover
 from backtesting.test import SMA
 from ta.wrapper import add_all_ta_features
@@ -40,7 +40,7 @@ class SmaCross(SignalStrategy,
         self.set_trailing_sl(2)
 
 
-bt = Backtest(EURUSD, SmaCross, cash=1000, commission=.002)
+bt = Backtest(GOOG, SmaCross, cash=1000, commission=.002)
 
 print(Backtest)
 
