@@ -1,6 +1,6 @@
 # Brian
 
-![Brian](https://imageupload.io/HcTNEv473o9uh5B)
+<img src="https://imageupload.io/ib/NEQ0QSI7ZJ5zPGI_1699236349.png"/>
 
 ## Installation and Usage
 
